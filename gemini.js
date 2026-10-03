@@ -1,6 +1,5 @@
-require("dotenv").config();
-
-const { GoogleGenAI } = require("@google/genai");
+import "dotenv/config";
+import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -10,7 +9,7 @@ const embeddingDimensions = Number(
   process.env.GEMINI_EMBEDDING_DIMENSIONS || 768
 );
 
-async function createEmbedding(text) {
+export async function createEmbedding(text) {
   const response = await ai.models.embedContent({
     model: process.env.GEMINI_EMBEDDING_MODEL || "gemini-embedding-001",
     contents: text,
@@ -27,7 +26,7 @@ async function createEmbedding(text) {
   return values;
 }
 
-async function generateAnswer(question, context) {
+export async function generateAnswer(question, context) {
   const response = await ai.models.generateContent({
     model: process.env.GEMINI_CHAT_MODEL || "gemini-2.5-flash-lite",
     contents: `Context:\n\n${context}\n\nUser question:\n${question}`,
@@ -46,8 +45,3 @@ async function generateAnswer(question, context) {
 
   return text;
 }
-
-module.exports = {
-  createEmbedding,
-  generateAnswer,
-};

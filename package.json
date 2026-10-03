@@ -2,6 +2,7 @@
   "name": "simple-rag",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "A minimal RAG application built with Node.js, Gemini embeddings, PostgreSQL, and pgvector.",
   "main": "ask.js",
   "scripts": {

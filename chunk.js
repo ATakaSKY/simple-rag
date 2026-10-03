@@ -1,4 +1,4 @@
-function chunkDocument(text) {
+export function chunkDocument(text) {
   // Deliberately simple for learning:
   // each paragraph becomes one chunk.
   return text
@@ -6,5 +6,3 @@ function chunkDocument(text) {
     .map((chunk) => chunk.trim())
     .filter(Boolean);
 }
-
-module.exports = { chunkDocument };

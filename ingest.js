@@ -1,9 +1,12 @@
-const fs = require("fs");
-const path = require("path");
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const pool = require("./db");
-const { createEmbedding } = require("./gemini");
-const { chunkDocument } = require("./chunk");
+import pool from "./db.js";
+import { createEmbedding } from "./gemini.js";
+import { chunkDocument } from "./chunk.js";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 async function main() {
   const documentsDir = path.join(__dirname, "documents");

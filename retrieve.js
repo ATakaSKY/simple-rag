@@ -1,7 +1,7 @@
-const pool = require("./db");
-const { createEmbedding } = require("./gemini");
+import pool from "./db.js";
+import { createEmbedding } from "./gemini.js";
 
-async function retrieve(question, topK = 3) {
+export async function retrieve(question, topK = 3) {
   const queryEmbedding = await createEmbedding(question);
   const vector = `[${queryEmbedding.join(",")}]`;
 
@@ -21,5 +21,3 @@ async function retrieve(question, topK = 3) {
 
   return result.rows;
 }
-
-module.exports = { retrieve };

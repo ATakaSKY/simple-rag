@@ -1,8 +1,8 @@
-const readline = require("readline");
+import readline from "node:readline";
 
-const pool = require("./db");
-const { retrieve } = require("./retrieve");
-const { generateAnswer } = require("./gemini");
+import pool from "./db.js";
+import { retrieve } from "./retrieve.js";
+import { generateAnswer } from "./gemini.js";
 
 async function ask(question) {
   const results = await retrieve(question, 3);
