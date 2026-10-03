@@ -1,0 +1,14 @@
+PocketOps dashboards help teams watch key metrics without writing
+custom queries.
+
+A dashboard is a collection of panels. Each panel can show a line chart,
+a single-number stat tile, or a small data table.
+
+Workspace-wide dashboard filters apply to every panel on that dashboard
+so viewers can narrow by team, region, or time range in one place.
+
+Dashboards can be shared as read-only links to guest viewers. Changing
+layout or adding panels requires the analyst role or higher.
+
+PocketOps does not charge per dashboard. Usage billing is based on the
+number of actively monitored hosts in the workspace.

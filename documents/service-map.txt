@@ -1,0 +1,15 @@
+Service Map is a PocketOps feature that draws a live graph of how
+services connect to each other inside a workspace.
+
+Team members open Service Map from the PocketOps web console under
+Monitor → Service Map.
+
+Before anyone can use it, a workspace admin must enable the Topology
+add-on in Settings → Features.
+
+Service Map supports filters for service name, environment
+(development, staging, production), connection protocol, and health
+status.
+
+The graph refreshes automatically every 60 seconds. On the free plan,
+snapshot history is kept for seven days.
