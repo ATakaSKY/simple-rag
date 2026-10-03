@@ -9,7 +9,7 @@ const embeddingDimensions = Number(
   process.env.GEMINI_EMBEDDING_DIMENSIONS || 768
 );
 
-export async function createEmbedding(text) {
+export async function createEmbedding(text: string): Promise<number[]> {
   const response = await ai.models.embedContent({
     model: process.env.GEMINI_EMBEDDING_MODEL || "gemini-embedding-001",
     contents: text,
@@ -26,7 +26,10 @@ export async function createEmbedding(text) {
   return values;
 }
 
-export async function generateAnswer(question, context) {
+export async function generateAnswer(
+  question: string,
+  context: string
+): Promise<string> {
   const response = await ai.models.generateContent({
     model: process.env.GEMINI_CHAT_MODEL || "gemini-2.5-flash-lite",
     contents: `Context:\n\n${context}\n\nUser question:\n${question}`,

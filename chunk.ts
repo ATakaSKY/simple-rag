@@ -1,4 +1,4 @@
-export function chunkDocument(text) {
+export function chunkDocument(text: string): string[] {
   // Deliberately simple for learning:
   // each paragraph becomes one chunk.
   return text

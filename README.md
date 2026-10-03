@@ -22,12 +22,13 @@ It demonstrates the core pipeline:
 
 ## What each file does
 
-- `ingest.js` — reads documents, chunks them, creates embeddings, and stores them in Postgres.
-- `retrieve.js` — embeds a question and asks pgvector for the most similar chunks.
-- `ask.js` — combines retrieval with the LLM to produce the final answer.
-- `chunk.js` — contains the intentionally simple paragraph-based chunker.
-- `gemini.js` — calls the Gemini Embeddings API and `generateContent` for answers.
-- `db.js` — creates the PostgreSQL connection pool.
+- `ingest.ts` — reads documents, chunks them, creates embeddings, and stores them in Postgres.
+- `retrieve.ts` — embeds a question and asks pgvector for the most similar chunks.
+- `ask.ts` — combines retrieval with the LLM to produce the final answer.
+- `chunk.ts` — contains the intentionally simple paragraph-based chunker.
+- `gemini.ts` — calls the Gemini Embeddings API and `generateContent` for answers.
+- `db.ts` — creates the PostgreSQL connection pool.
+- `types.ts` — shared TypeScript types for retrieval results.
 - `schema.sql` — creates the pgvector extension, table, and vector index.
 - `documents/` — sample knowledge-base documents.
 
@@ -41,6 +42,18 @@ It demonstrates the core pipeline:
 
 ```bash
 npm install
+```
+
+Type-check (optional):
+
+```bash
+npm run typecheck
+```
+
+Compile to JavaScript in `dist/` (optional; `npm run ingest` / `npm run ask` use `tsx` directly):
+
+```bash
+npm run build
 ```
 
 ## 2. Configure the API key

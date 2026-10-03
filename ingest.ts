@@ -8,7 +8,7 @@ import { chunkDocument } from "./chunk.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-async function main() {
+async function main(): Promise<void> {
   const documentsDir = path.join(__dirname, "documents");
   const files = fs
     .readdirSync(documentsDir)
@@ -28,7 +28,7 @@ async function main() {
     const text = fs.readFileSync(filePath, "utf8");
     const chunks = chunkDocument(text);
 
-    console.log(`\\n${file}: ${chunks.length} chunks`);
+    console.log(`\n${file}: ${chunks.length} chunks`);
 
     for (const chunk of chunks) {
       const embedding = await createEmbedding(chunk);
@@ -46,12 +46,13 @@ async function main() {
     }
   }
 
-  console.log(`\\nIndexed ${chunkCount} chunks.`);
+  console.log(`\nIndexed ${chunkCount} chunks.`);
 }
 
 main()
-  .catch((error) => {
-    console.error("\\nIngestion failed:", error.message);
+  .catch((error: unknown) => {
+    const message = error instanceof Error ? error.message : String(error);
+    console.error("\nIngestion failed:", message);
     process.exitCode = 1;
   })
   .finally(async () => {

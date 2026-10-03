@@ -4,13 +4,13 @@ import pool from "./db.js";
 import { retrieve } from "./retrieve.js";
 import { generateAnswer } from "./gemini.js";
 
-async function ask(question) {
+async function ask(question: string): Promise<void> {
   const results = await retrieve(question, 3);
 
-  console.log("\\n--- Retrieved chunks ---");
+  console.log("\n--- Retrieved chunks ---");
 
   for (const result of results) {
-    console.log(`\\nScore: ${Number(result.score).toFixed(4)}`);
+    console.log(`\nScore: ${Number(result.score).toFixed(4)}`);
     console.log(`Source: ${result.source}`);
     console.log(`Text: ${result.content}`);
   }
@@ -18,17 +18,17 @@ async function ask(question) {
   const context = results
     .map(
       (result, index) =>
-        `[Source ${index + 1} - ${result.source}]\\n${result.content}`
+        `[Source ${index + 1} - ${result.source}]\n${result.content}`
     )
-    .join("\\n\\n");
+    .join("\n\n");
 
   const answer = await generateAnswer(question, context);
 
-  console.log("\\n--- Final answer ---");
+  console.log("\n--- Final answer ---");
   console.log(answer);
 }
 
-async function main() {
+async function main(): Promise<void> {
   const question = process.argv.slice(2).join(" ").trim();
 
   if (question) {
@@ -43,9 +43,9 @@ async function main() {
   });
 
   console.log("Simple RAG");
-  console.log('Ask a question, or type "exit" to quit.\\n');
+  console.log('Ask a question, or type "exit" to quit.\n');
 
-  const prompt = () => {
+  const prompt = (): void => {
     rl.question("> ", async (input) => {
       const trimmed = input.trim();
 
@@ -62,8 +62,9 @@ async function main() {
 
       try {
         await ask(trimmed);
-      } catch (error) {
-        console.error("\\nQuery failed:", error.message);
+      } catch (error: unknown) {
+        const message = error instanceof Error ? error.message : String(error);
+        console.error("\nQuery failed:", message);
       }
 
       console.log();
@@ -74,8 +75,9 @@ async function main() {
   prompt();
 }
 
-main().catch(async (error) => {
-  console.error("\\nQuery failed:", error.message);
+main().catch(async (error: unknown) => {
+  const message = error instanceof Error ? error.message : String(error);
+  console.error("\nQuery failed:", message);
   await pool.end();
   process.exitCode = 1;
 });

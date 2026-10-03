@@ -4,16 +4,24 @@
   "private": true,
   "type": "module",
   "description": "A minimal RAG application built with Node.js, Gemini embeddings, PostgreSQL, and pgvector.",
-  "main": "ask.js",
+  "main": "dist/ask.js",
   "scripts": {
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
-    "ingest": "node ingest.js",
-    "ask": "node ask.js"
+    "ingest": "tsx ingest.ts",
+    "ask": "tsx ask.ts",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc"
   },
   "dependencies": {
     "@google/genai": "^2.27.0",
     "dotenv": "^17.2.2",
     "pg": "^8.16.3"
+  },
+  "devDependencies": {
+    "@types/node": "^24.3.0",
+    "@types/pg": "^8.15.5",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
   }
 }
